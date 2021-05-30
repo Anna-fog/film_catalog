@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <app-header></app-header>
+    <app-results v-if="foundFilms.length" :foundFilms="foundFilms"></app-results>
+    <pagination v-if="foundFilms.length"></pagination>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppHeader from "./components/Header";
+import AppResults from "./components/Results";
+import Pagination from "./components/Pagination";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    AppHeader,
+    AppResults,
+    Pagination
+  },
+
+  computed: {
+    foundFilms() {
+      return this.$store.getters.foundFilms;
+    }
+  },
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0;
+  font-family: sans-serif;
 }
 </style>

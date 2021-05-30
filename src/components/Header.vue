@@ -1,0 +1,68 @@
+<template>
+  <header class="header">
+    <div class="logo">Movie catalog</div>
+    <input class="search" @keydown.enter="searchFilm" v-model="searchedFilm" type="text">
+    <div class="user">
+      <img class="user__icon" src="../assets/user.svg" alt="user">
+      <div class="user__name">Alexander Borisenko</div>
+      <img class="user__menu" src="../assets/menu.svg" alt="menu">
+    </div>
+  </header>
+</template>
+
+<script>
+export default {
+  methods: {
+    searchFilm() {
+      this.$store.dispatch('fetchFilms', this.searchedFilm);
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: lightblue;
+
+  .logo {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .search {
+    height: 30px;
+    width: 45%;
+    margin: 0 20px;
+    padding: 3px 10px;
+    border: none;
+  }
+
+  .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__name {
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    &__icon {
+      width: 20px;
+      height: auto;
+      cursor: pointer;
+    }
+
+    &__menu {
+      width: 10px;
+      height: auto;
+    }
+  }
+}
+
+</style>
