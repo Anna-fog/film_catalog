@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-header></app-header>
-    <app-results v-if="foundFilms.length" :foundFilms="foundFilms"></app-results>
+    <app-results v-if="foundFilms.length"></app-results>
     <pagination v-if="foundFilms.length"></pagination>
   </div>
 </template>

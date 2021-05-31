@@ -14,7 +14,9 @@
 export default {
   methods: {
     searchFilm() {
-      this.$store.dispatch('fetchFilms', this.searchedFilm);
+      this.$store.commit('clearCurrentSearch');
+      this.$store.commit('setSearchedFilm', this.searchedFilm);
+      this.$store.dispatch('fetchFilms');
     }
   }
 }

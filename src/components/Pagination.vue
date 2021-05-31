@@ -1,8 +1,8 @@
 <template>
   <div class="pagination">
-    <img src="../assets/left-arrow.svg" alt="" class="left-arrow">
-    <div v-for="page in pagesTotal" class="page">{{ page }}</div>
-    <img src="../assets/right-arrow.svg" alt="" class="right-arrow">
+    <img class="left-arrow" @click="prevPage" src="../assets/left-arrow.svg" alt="previous">
+    <div class="page" @click="setCurrentPage(page)" v-for="page in pagesToShow" >{{ page }}</div>
+    <img class="right-arrow" @click="nextPage" src="../assets/right-arrow.svg" alt="next">
   </div>
 </template>
 
@@ -10,11 +10,40 @@
 export default {
   computed: {
     pagesTotal() {
-      return Math.floor(this.$store.getters.results / 10)
+      const list = [];
+      for (let i = 0; i < this.$store.state.pagesTotal; i++) {
+        list.push(i);
+      }
+
+      return list;
     },
 
     pagesToShow() {
-      return this.pagesTotal
+      const start = this.$store.state.currentPage;
+      const end = start + 10;
+
+      if (this.$store.state.currentPage + 10 < this.$store.state.pagesTotal) {
+        return this.pagesTotal.slice(start, end);
+      } else {
+        return this.pagesTotal.slice(-10);
+      }
+    }
+  },
+
+  methods: {
+    nextPage() {
+      this.$store.commit('nextPage');
+      this.$store.dispatch('fetchFilms');
+    },
+
+    prevPage() {
+      this.$store.commit('prevPage');
+      this.$store.dispatch('fetchFilms');
+    },
+
+    setCurrentPage(page) {
+      this.$store.commit('setCurrentPage', page);
+      this.$store.dispatch('fetchFilms');
     }
   }
 }
@@ -27,6 +56,7 @@ export default {
   justify-content: center;
   width: 400px;
   margin: 0 auto;
+  padding-bottom: 60px;
 }
 
 .page {

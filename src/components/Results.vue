@@ -2,7 +2,7 @@
   <div class="results">
     <div class="results__header">You searched for: {{ searchedFilm }}, {{ results}} results found</div>
     <div class="results__wrapper">
-      <film-card v-for="film in foundFilms" :film="film"></film-card>
+      <film-card v-for="(film, i) in foundFilms" :film="film" :key="i"></film-card>
     </div>
   </div>
 </template>
@@ -11,15 +11,13 @@
 import FilmCard from "./FilmCard";
 
 export default {
-  props: ['foundFilms'],
-
   components: {
     FilmCard
   },
 
   computed: {
     foundFilms() {
-      return this.$store.getters.foundFilms
+      return this.$store.state.foundFilms
     },
 
     searchedFilm() {
