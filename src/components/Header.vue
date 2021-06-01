@@ -24,16 +24,21 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  height: 60px;
+  min-height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 10px 20px;
   background-color: lightblue;
 
   .logo {
     font-size: 30px;
+    line-height: 100%;
     font-weight: bold;
+
+    @media (max-width: 600px) {
+      font-size: 20px;
+    }
   }
 
   .search {
@@ -42,6 +47,10 @@ export default {
     margin: 0 20px;
     padding: 3px 10px;
     border: none;
+
+    @media (max-width: 600px) {
+      width: 70%;
+    }
   }
 
   .user {
@@ -50,8 +59,13 @@ export default {
     align-items: center;
 
     &__name {
+      width: 150px;
       margin: 0 5px;
       cursor: pointer;
+
+      @media (max-width: 600px) {
+        display: none;
+      }
     }
 
     &__icon {

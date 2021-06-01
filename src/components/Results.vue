@@ -1,8 +1,10 @@
 <template>
-  <div class="results">
-    <div class="results__header">You searched for: {{ searchedFilm }}, {{ results}} results found</div>
-    <div class="results__wrapper">
-      <film-card v-for="(film, i) in foundFilms" :film="film" :key="i"></film-card>
+  <div>
+    <div class="results">
+      <div class="results__header">You searched for: {{ searchedFilm }}, {{ results}} results found</div>
+      <div class="results__wrapper">
+        <film-card v-for="(film, i) in foundFilms" :film="film" :key="i"></film-card>
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +19,7 @@ export default {
 
   computed: {
     foundFilms() {
-      return this.$store.state.foundFilms
+      return this.$store.state.foundFilms;
     },
 
     searchedFilm() {
@@ -25,7 +27,7 @@ export default {
     },
 
     results() {
-      return this.$store.getters.results
+      return Number(this.$store.getters.results)
     }
   }
 }
@@ -38,6 +40,10 @@ export default {
   &__header {
     font-size: 24px;
     font-weight: bold;
+
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
   }
 
   &__wrapper {
@@ -45,7 +51,10 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+
+    @media (max-width: 1200px) {
+      justify-content: center;
+    }
   }
 }
-
 </style>

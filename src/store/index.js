@@ -7,7 +7,9 @@ export default createStore({
     foundFilms: [],
     results: null,
     currentPage: 1,
-    pagesTotal: null
+    pagesTotal: null,
+    submitSearch: false,
+    loading: false
   },
 
   mutations: {
@@ -42,11 +44,16 @@ export default createStore({
 
   actions: {
     fetchFilms({ state }) {
+      state.loading = true;
+      console.log(state.loading)
+
       axios.get('https://www.omdbapi.com/?i=tt3896198&apikey=8523cbb8&s=' + state.searchedFilm + '&page=' + state.currentPage)
         .then(res => {
           state.foundFilms = res.data.Search;
           state.results = res.data.totalResults;
           state.pagesTotal = Math.ceil(state.results / 10);
+          state.submitSearch = true;
+          state.loading = false;
         })
     }
   },
@@ -62,6 +69,14 @@ export default createStore({
 
     results(state) {
       return state.results;
+    },
+
+    submitSearch(state) {
+      return state.submitSearch;
+    },
+
+    loading(state) {
+      return state.loading;
     }
   }
 })

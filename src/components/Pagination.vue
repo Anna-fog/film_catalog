@@ -57,11 +57,15 @@ export default {
   width: 400px;
   margin: 0 auto;
   padding-bottom: 60px;
+
+  @media (max-width: 600px) {
+    width: 250px;
+  }
 }
 
 .page {
   padding: 5px;
-  margin: 5px;
+  margin: 2px 5px;
   cursor: pointer;
 }
 
